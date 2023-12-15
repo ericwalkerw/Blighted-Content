@@ -1,4 +1,7 @@
 const StateMachine = require("javascript-state-machine");
+const Emitter = require("../Utilities/EventEmitter");
+const Key = require("EventCode");
+
 const STATE = {
   INIT: "init",
   START: "start",
@@ -10,8 +13,20 @@ cc.Class({
   extends: cc.Component,
   properties: {
     monster: 0,
+    mSounds: {
+      type: cc.AudioClip,
+      default: [],
+    },
   },
   onLoad() {
+    Emitter.instance.registerEvent(
+      Key.SEND_DATA,
+      ((data) => {
+        cc.log(data);
+        Emitter.instance.emit(Key.PLAY_MUSIC, this.mSounds[0]);
+      }).bind(this)
+    );
+
     this._onStartGame = this.onStartGame.bind(this);
     this._onCompleteGame = this.onCompleteGame.bind(this);
     this._onGameOver = this.onGameOver.bind(this);
@@ -36,7 +51,7 @@ cc.Class({
       switch (this.fsm.state) {
         case STATE.INIT:
           this.fsm["goStart"]();
-          this.monster = 0;
+          this.monster = 1;
           break;
         case STATE.START:
           if (this.monster == 0) {
@@ -45,11 +60,10 @@ cc.Class({
             this.fsm["goOver"]();
           }
         default:
-          cc.log('out schedule')
           this.unscheduleAllCallbacks();
           break;
       }
-    }, 2);
+    }, 1);
   },
 
   onStartGame() {

@@ -9,7 +9,6 @@ cc.Class({
         Emitter.instance.registerEvent(Key.POPUP_HIDE, this.popupHide.bind(this));
     },
     popupShow(node){
-        cc.log('alo', node);
         node.active = true;
     },
     popupHide(node){

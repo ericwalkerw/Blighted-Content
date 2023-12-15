@@ -7,9 +7,7 @@ module.exports = {
     //#region SOUND
     PLAY_MUSIC:'playMusic',
     PLAY_SFX:'playSfx',
-    CHANGE_VOLUME:'changeVolume',
-    MUTE_SFX:'muteSfx',
-    TURN_ON_MUSIC:'turnOnMusic',
-    TURN_OFF_MUSIC:'turnOffMusic'
+    CHANGE_SFX_VOLUME:'changeSfxVolume',
+    CHANGE_MUSIC_VOLUME:'changeMusicVolume',
     //#endregion
 }
